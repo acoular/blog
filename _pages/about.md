@@ -4,8 +4,15 @@ title: About Me
 permalink: /about/
 ---
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+**Acoular** is a framework for acoustic beamforming that is written in the Python programming language. It is aimed at applications in acoustic testing. Multichannel data recorded by a microphone array can be processed and analyzed in order to generate mappings of sound source distributions. The maps (acoustic photographs) can then be used to locate sources of interest and to characterize them using their spectra.
 
+A few highlights of the framework:
 
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+- covers several beamforming algorithms
+- different advanced deconvolution algorithms
+- both time-domain and frequency-domain operation included
+- 3D mapping possible
+- application for stationary and for moving targets
+- supports both scripting and graphical user interface
+- efficient: intelligent caching, parallel computing with Numba
+- easily extendible and well [documented](http://acoular.org)
