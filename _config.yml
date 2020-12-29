@@ -102,6 +102,9 @@ paginate_path: /page:num/
 
 remote_theme: jekyll/minima
 
+minima:
+  skin: solarized
+
 titles_from_headings:
   enabled:     true
   strip_title: true
