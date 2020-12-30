@@ -2,7 +2,7 @@
 // If you wish to override any of this CSS, do so in _sass/minima/custom-styles.css
  
 $dt-gray-dark: #d7d5c9;  // Background
-$dt-code-cell-background: #cdcbbc;
+$dt-code-cell-background: #d9d9ff;
 $dt-gray: #bbb8a5;       // Current Line & Selection
 $dt-gray-light: #07070d; // Foreground
 $dt-blue: #9d8d5b;       // Comment
@@ -51,7 +51,7 @@ $dt-green-light: #531a6e;
     padding-top:0 !important;
 }
 .input_area pre {
-    border-left: 1px solid lightcoral;
+    border-left: 1px solid rgb(128, 240, 128);
 }
 .output_area pre {
     border-left: 1px solid grey;
@@ -95,7 +95,7 @@ $dt-green-light: #531a6e;
     .sr,
     .s1,
     .ss {
-         color:rgb(231, 153, 122);
+         color:#186685;
     }
   
     .go {
@@ -132,7 +132,7 @@ $dt-green-light: #531a6e;
  
     .p {
          font-weight: bold;
-         color: rgb(102, 217, 239);
+         color: #992610;
  }
   
     .ge {
