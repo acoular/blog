@@ -431,7 +431,7 @@ pre code { font-size: 15px !important; }
 
 .language-python + .language-plaintext pre { background-color: white !important; }
 
-.input_area pre, .input_area div { margin-bottom: 1.0rem !important; margin-top: 1.5rem !important; padding-bottom: 0 !important; padding-top: 0 !important; background: #d9d9ff !important; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-family: Menlo, Monaco, Consolas, "Lucida Console", Roboto, Ubuntu, monospace; border-radius: 5px; font-size: 105%; }
+.input_area pre, .input_area div { margin-bottom: 1.0rem !important; margin-top: 1.5rem !important; padding-bottom: 0 !important; padding-top: 0 !important; background: #d9d9ff !important; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; border-radius: 5px; font-size: 115%; }
 
 .output_area pre, .output_area div { margin-bottom: 1rem !important; margin-top: 0rem !important; padding-bottom: 0 !important; padding-top: 0 !important; }
 
