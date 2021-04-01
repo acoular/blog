@@ -81,7 +81,7 @@ html_escape:
 
 # Everything below here should be left alone. Modifications may break fastpages
 future: true
-theme: minima
+#theme: minima
 plugins:
   - jekyll-feed
   - jekyll-gist
@@ -100,7 +100,8 @@ plugins:
 paginate: 15
 paginate_path: /page:num/
 
-remote_theme: jekyll/minima
+#remote_theme: jekyll/minima
+remote_theme: daattali/beautiful-jekyll@5.0.0
 
 titles_from_headings:
   enabled:     true
@@ -120,3 +121,13 @@ kramdown:
 feed:
   posts_limit: 5 #default posts_limit: 10
   excerpt_only: true
+
+avatar: "/assets/img/Acoular-logo.png"
+
+# --- List of links in the navigation bar --- #
+
+navbar-links:
+  About Me: "about"
+  Search: "search"
+  Contents: "catgories"
+  Documentation: "http://acoular.org/"
