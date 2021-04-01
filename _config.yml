@@ -129,5 +129,5 @@ avatar: "/assets/img/Acoular-logo.png"
 navbar-links:
   About Me: "about"
   Search: "search"
-  Contents: "catgories"
+  Contents: "categories"
   Documentation: "http://acoular.org/"
