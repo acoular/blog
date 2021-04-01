@@ -5,10 +5,11 @@ _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
-*.xml
+#*.xml
 vendor
 _notebooks/.ipynb_checkpoints
 # Local Netlify folder
 .netlify
 .tweet-cache
 __pycache__
+*cache/*
