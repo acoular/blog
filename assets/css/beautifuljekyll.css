@@ -454,7 +454,6 @@ footer .footer-custom-content {
   text-decoration: none;
   color: {{ site.hover-col | default: "#0085A1" }};
 }
-
 .post-preview .post-title {
   font-size: 1.875rem;
   margin-top: 0;
@@ -994,4 +993,9 @@ pre {
 .center {
   display: block;
   margin: 0 auto;
+}
+
+/* --- Acoular additions --- */
+.container-md {
+  max-width: 800px;
 }

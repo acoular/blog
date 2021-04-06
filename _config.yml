@@ -34,7 +34,7 @@ url: "https://acoular.github.io" # the base hostname & protocol for your site, e
 #
 # 3. You must replace the parameter `baseurl` in _action_files/settings.ini with the same value as you set here but WITHOUT QUOTES.
 #
-baseurl: "/blog" # the subpath of your site, e.g. "/blog".
+baseurl: "/blog/" # the subpath of your site, e.g. "/blog".
 
 # Github and twitter are optional:
 minima:
@@ -49,7 +49,7 @@ use_math: true
 show_description: true
 
 # Set this to true to display image previews on home page, if they exist
-show_image: false
+show_image: true
 
 # Set this to true to turn on annotations with hypothes.is (https://web.hypothes.is/)
 annotations: false
@@ -121,7 +121,7 @@ kramdown:
 feed:
   posts_limit: 5 #default posts_limit: 10
   excerpt_only: true
-
+  
 avatar: "/assets/img/Acoular-logo.png"
 
 # --- List of links in the navigation bar --- #
@@ -129,5 +129,7 @@ avatar: "/assets/img/Acoular-logo.png"
 navbar-links:
   About Me: "about"
   Search: "search"
-  Contents: "categories"
+  Contents: "tags"
   Documentation: "http://acoular.org/"
+
+excerpt_separator: <!--more-->
