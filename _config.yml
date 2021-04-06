@@ -133,3 +133,5 @@ navbar-links:
   Documentation: "http://acoular.org/"
 
 excerpt_separator: <!--more-->
+
+comments: true
