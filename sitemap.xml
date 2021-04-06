@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://acoular.github.io/blog/markdown/2020/01/14/test-markdown-post.html</loc>
-<lastmod>2020-01-14T00:00:00-06:00</lastmod>
+<loc>https://acoular.github.io/blog/2021/04/01/getstart1.html</loc>
+<lastmod>2021-04-01T00:00:00-05:00</lastmod>
 </url>
 <url>
-<loc>https://acoular.github.io/blog/jupyter/2020/02/20/test.html</loc>
-<lastmod>2020-02-20T00:00:00-06:00</lastmod>
+<loc>https://acoular.github.io/blog/2021/04/01/getstart2.html</loc>
+<lastmod>2021-04-01T00:00:00-05:00</lastmod>
 </url>
 <url>
-<loc>https://acoular.github.io/blog/2020/03/09/getstart.html</loc>
-<lastmod>2020-03-09T00:00:00-05:00</lastmod>
+<loc>https://acoular.github.io/blog/2021/04/01/getstart3.html</loc>
+<lastmod>2021-04-01T00:00:00-05:00</lastmod>
 </url>
 <url>
 <loc>https://acoular.github.io/blog/about/</loc>
@@ -22,6 +22,6 @@
 <loc>https://acoular.github.io/blog/search/</loc>
 </url>
 <url>
-<loc>https://acoular.github.io/blog/categories/</loc>
+<loc>https://acoular.github.io/blog/tags.html</loc>
 </url>
 </urlset>

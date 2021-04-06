@@ -19,7 +19,7 @@ p {
   margin: 1.875rem 0;
 }
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Lora', 'Times New Roman', serif;
   font-weight: 800;
   line-height: 1.1;
 }
@@ -441,7 +441,6 @@ footer .footer-custom-content {
   text-decoration: none;
   color: #0085A1;
 }
-
 .post-preview .post-title {
   font-size: 1.875rem;
   margin-top: 0;
@@ -981,4 +980,9 @@ pre {
 .center {
   display: block;
   margin: 0 auto;
+}
+
+/* --- Acoular additions --- */
+.container-md {
+  max-width: 800px;
 }

@@ -9,11 +9,11 @@
 
   
 
-  <title>About Me</title>
+  <title>Tag Index</title>
 
   
 
-  <meta name="description" content="**Acoular** is a framework for acoustic beamforming that is written in the Python programming language. It is aimed at applications in acoustic testing. Multichannel data recorded by a microphone array can be processed and analyzed in order to generate mappings of sound source distributions. The maps (acoustic photographs) can then...">
+  <meta name="description" content="{% assign date_format = site.date_format | default: &quot;%B %-d, %Y&quot; %} {%- capture site_tags -%} {%- for tag in site.tags -%} {{- tag | first -}}{%- unless forloop.last -%},{%- endunless -%} {%- endfor -%} {%- endcapture -%} {%- assign tags_list = site_tags | split:',' | sort -%} {%- for tag...">
 
   
 
@@ -70,8 +70,8 @@
 
   
   <meta property="og:site_name" content="Acoular">
-  <meta property="og:title" content="About Me">
-  <meta property="og:description" content="**Acoular** is a framework for acoustic beamforming that is written in the Python programming language. It is aimed at applications in acoustic testing. Multichannel data recorded by a microphone array can be processed and analyzed in order to generate mappings of sound source distributions. The maps (acoustic photographs) can then...">
+  <meta property="og:title" content="Tag Index">
+  <meta property="og:description" content="{% assign date_format = site.date_format | default: &quot;%B %-d, %Y&quot; %} {%- capture site_tags -%} {%- for tag in site.tags -%} {{- tag | first -}}{%- unless forloop.last -%},{%- endunless -%} {%- endfor -%} {%- endcapture -%} {%- assign tags_list = site_tags | split:',' | sort -%} {%- for tag...">
 
   
   <meta property="og:image" content="https://acoular.github.io/blog/assets/img/Acoular-logo.png">
@@ -79,8 +79,8 @@
 
   
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://acoular.github.io/blog/about/">
-  <link rel="canonical" href="https://acoular.github.io/blog/about/">
+  <meta property="og:url" content="https://acoular.github.io/blog/tags.html">
+  <link rel="canonical" href="https://acoular.github.io/blog/tags.html">
   
 
   
@@ -89,8 +89,8 @@
   <meta name="twitter:site" content="@">
   <meta name="twitter:creator" content="@">
 
-  <meta property="twitter:title" content="About Me">
-  <meta property="twitter:description" content="**Acoular** is a framework for acoustic beamforming that is written in the Python programming language. It is aimed at applications in acoustic testing. Multichannel data recorded by a microphone array can be processed and analyzed in order to generate mappings of sound source distributions. The maps (acoustic photographs) can then...">
+  <meta property="twitter:title" content="Tag Index">
+  <meta property="twitter:description" content="{% assign date_format = site.date_format | default: &quot;%B %-d, %Y&quot; %} {%- capture site_tags -%} {%- for tag in site.tags -%} {{- tag | first -}}{%- unless forloop.last -%},{%- endunless -%} {%- endfor -%} {%- endcapture -%} {%- assign tags_list = site_tags | split:',' | sort -%} {%- for tag...">
 
   
   <meta name="twitter:image" content="https://acoular.github.io/blog/assets/img/Acoular-logo.png">
@@ -161,7 +161,7 @@
     <div class="row">
       <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
         <div class="page-heading">
-          <h1>About Me</h1>
+          <h1>Tag Index</h1>
           
 
           
@@ -181,20 +181,57 @@
     <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
       
 
-      <p><strong>Acoular</strong> is a framework for acoustic beamforming that is written in the Python programming language. It is aimed at applications in acoustic testing. Multichannel data recorded by a microphone array can be processed and analyzed in order to generate mappings of sound source distributions. The maps (acoustic photographs) can then be used to locate sources of interest and to characterize them using their spectra.</p>
-
-<p>A few highlights of the framework:</p>
-
-<ul>
-  <li>covers several beamforming algorithms</li>
-  <li>different advanced deconvolution algorithms</li>
-  <li>both time-domain and frequency-domain operation included</li>
-  <li>3D mapping possible</li>
-  <li>application for stationary and for moving targets</li>
-  <li>supports both scripting and graphical user interface</li>
-  <li>efficient: intelligent caching, parallel computing with Numba</li>
-  <li>easily extendible and well <a href="http://acoular.org">documented</a></li>
-</ul>
+      <a href="#Clean SC" class="btn btn-primary tag-btn"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;Clean SC&nbsp;(1)</a><a href="#deconvolution" class="btn btn-primary tag-btn"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;deconvolution&nbsp;(1)</a><a href="#frequency domain beamforming" class="btn btn-primary tag-btn"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;frequency domain beamforming&nbsp;(2)</a><a href="#functional beamforming" class="btn btn-primary tag-btn"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;functional beamforming&nbsp;(1)</a><a href="#time domain beamforming" class="btn btn-primary tag-btn"><i class="fas fa-tag" aria-hidden="true"></i>&nbsp;time domain beamforming&nbsp;(1)</a><div id="full-tags-list"><h2 id="Clean SC" class="linked-section">
+        <i class="fas fa-tag" aria-hidden="true"></i>
+        &nbsp;Clean SC&nbsp;(1)
+    </h2>
+    <div class="post-list"><div class="tag-entry">
+                <a href="/blog/2021/04/01/getstart2.html">Getting started with Acoular - Part 2</a>
+                <div class="entry-date">
+                    <time datetime="2021-04-01T00:00:00-05:00">April 1, 2021</time>
+                </div>
+            </div></div><h2 id="deconvolution" class="linked-section">
+        <i class="fas fa-tag" aria-hidden="true"></i>
+        &nbsp;deconvolution&nbsp;(1)
+    </h2>
+    <div class="post-list"><div class="tag-entry">
+                <a href="/blog/2021/04/01/getstart2.html">Getting started with Acoular - Part 2</a>
+                <div class="entry-date">
+                    <time datetime="2021-04-01T00:00:00-05:00">April 1, 2021</time>
+                </div>
+            </div></div><h2 id="frequency domain beamforming" class="linked-section">
+        <i class="fas fa-tag" aria-hidden="true"></i>
+        &nbsp;frequency domain beamforming&nbsp;(2)
+    </h2>
+    <div class="post-list"><div class="tag-entry">
+                <a href="/blog/2021/04/01/getstart2.html">Getting started with Acoular - Part 2</a>
+                <div class="entry-date">
+                    <time datetime="2021-04-01T00:00:00-05:00">April 1, 2021</time>
+                </div>
+            </div><div class="tag-entry">
+                <a href="/blog/2021/04/01/getstart1.html">Getting started with Acoular - Part 1</a>
+                <div class="entry-date">
+                    <time datetime="2021-04-01T00:00:00-05:00">April 1, 2021</time>
+                </div>
+            </div></div><h2 id="functional beamforming" class="linked-section">
+        <i class="fas fa-tag" aria-hidden="true"></i>
+        &nbsp;functional beamforming&nbsp;(1)
+    </h2>
+    <div class="post-list"><div class="tag-entry">
+                <a href="/blog/2021/04/01/getstart2.html">Getting started with Acoular - Part 2</a>
+                <div class="entry-date">
+                    <time datetime="2021-04-01T00:00:00-05:00">April 1, 2021</time>
+                </div>
+            </div></div><h2 id="time domain beamforming" class="linked-section">
+        <i class="fas fa-tag" aria-hidden="true"></i>
+        &nbsp;time domain beamforming&nbsp;(1)
+    </h2>
+    <div class="post-list"><div class="tag-entry">
+                <a href="/blog/2021/04/01/getstart3.html">Getting started with Acoular - Part 3</a>
+                <div class="entry-date">
+                    <time datetime="2021-04-01T00:00:00-05:00">April 1, 2021</time>
+                </div>
+            </div></div></div>
 
 
       
