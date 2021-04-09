@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About Me
+title: About Acoular
 permalink: /about/
 ---
 
@@ -16,3 +16,6 @@ A few highlights of the framework:
 - supports both scripting and graphical user interface
 - efficient: intelligent caching, parallel computing with Numba
 - easily extendible and well [documented](http://acoular.org)
+
+Learn more:
+[Github](https://github.com/acoular/acoular) / [Documentation](http://acoular.org) / [Forum](https://groups.google.com/forum/#!forum/acoular-users)

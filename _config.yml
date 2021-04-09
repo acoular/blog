@@ -127,7 +127,7 @@ avatar: "/assets/img/Acoular-logo.png"
 # --- List of links in the navigation bar --- #
 
 navbar-links:
-  About Me: "about"
+  About: "about"
   Search: "search"
   Contents: "tags"
   Documentation: "http://acoular.org/"
