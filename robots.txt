@@ -1,1 +1,1 @@
-Sitemap: https://acoular.github.io/blog/sitemap.xml
+Sitemap: https://blog.acoular.org/sitemap.xml
