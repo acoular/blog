@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 5.0.0 | Copyright Dean Attali 2020 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+  
+
+  <title>Drone auralization example</title>
+
+  
+
+  <meta name="description" content="First, we import Acoular, NumPy, and Matplotlib's plotting functionality, and we initialize a random generator that we need later on. As Acoular does not feature a specific way to generate drone signals, we define our own signal class for doing that. It is derived from the existing SignalGenerator class. Signals...">
+
+  
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Acoular" href="https://blog.acoular.org/feed.xml">
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="Acoular">
+  <meta property="og:title" content="Drone auralization example">
+  <meta property="og:description" content="First, we import Acoular, NumPy, and Matplotlib's plotting functionality, and we initialize a random generator that we need later on. As Acoular does not feature a specific way to generate drone signals, we define our own signal class for doing that. It is derived from the existing SignalGenerator class. Signals...">
+
+  
+  <meta property="og:image" content="https://blog.acoular.org/assets/img/Acoular-logo.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:author" content="">
+  <meta property="og:article:published_time" content="2024-09-23T00:00:00-05:00">
+  <meta property="og:url" content="https://blog.acoular.org/2024/09/23/drone-auralization-example.html">
+  <link rel="canonical" href="https://blog.acoular.org/2024/09/23/drone-auralization-example.html">
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+
+  <meta property="twitter:title" content="Drone auralization example">
+  <meta property="twitter:description" content="First, we import Acoular, NumPy, and Matplotlib's plotting functionality, and we initialize a random generator that we need later on. As Acoular does not feature a specific way to generate drone signals, we define our own signal class for doing that. It is derived from the existing SignalGenerator class. Signals...">
+
+  
+  <meta name="twitter:image" content="https://blog.acoular.org/assets/img/Acoular-logo.png">
+  
+
+  
+
+
+  
+
+  
+
+</head>
+
+
+<body>
+
+  
+
+
+  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="https://blog.acoular.org/">Acoular</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags">Contents</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://acoular.org/">Documentation</a>
+          </li></ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="https://blog.acoular.org/">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/assets/img/Acoular-logo.png" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+  <div class="intro-header"></div>
+
+<div role="main" class=" container-md ">
+  
+
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Drone auralization example</h1><p class="page-description">How to use Acoular for simulating a drone flyby end exporting a stereo wav file</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2024-09-23T00:00:00-05:00" itemprop="datePublished">
+        Sep 23, 2024
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Gert Herold</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/acoular/blog/tree/master/_notebooks/2024-09-23-drone-auralization-example.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/acoular/blog/master?filepath=_notebooks%2F2024-09-23-drone-auralization-example.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+<!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2024-09-23-drone-auralization-example.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, we import Acoular, NumPy, and Matplotlib's plotting functionality, and we initialize a random generator that we need later on.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As Acoular does not feature a specific way to generate drone signals, we define our own signal class for doing that. 
+It is derived from the existing <code>SignalGenerator</code> class.</p>
+<p>Signals of multicopter drones are usually very recognizable, often featuring strong tonal components caused by the rotors.
+In reality, the radiated noise depends on a lot of factors, which we will not consider in detail here.
+For now, it shall be enough to assume the signal to be dependent on the number of rotors (with respective 
+rotational speeds) and the number of blades per rotor. 
+From that, the blade passing frequencies are calculated as dominant components and nicely mixed with 
+some higher harmonics and broadband noise.</p>
+<p>The new class shall be called <code>DroneSignalGenerator</code> and its interface will allow setting a list of "revolutions per minute" values for the rotors, implicitly setting the numbers of rotors, and the already mentioned number of blades per rotor.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">traits.api</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Int</span>
+
+<span class="k">class</span> <span class="nc">DroneSignalGenerator</span><span class="p">(</span> <span class="n">ac</span><span class="o">.</span><span class="n">SignalGenerator</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for generating a synthetic multicopter drone signal. </span>
+<span class="sd">    This is just a basic example class for demonstration purposes </span>
+<span class="sd">    with only few settable and some arbitrary fixed parameters.</span>
+<span class="sd">    It is not intended to create perfectly realistic signals.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># List with rotor speeds (for each rotor independently)</span>
+    <span class="c1"># Default: 1 rotor, 15000 rpm</span>
+    <span class="n">rpm_list</span> <span class="o">=</span> <span class="n">List</span><span class="p">([</span><span class="mi">15000</span><span class="p">,])</span>
+
+    <span class="c1"># Number of blades per rotor</span>
+    <span class="c1"># Default: 2</span>
+    <span class="n">num_blades_per_rotor</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">signal</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        function that returns the full signal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># use 1/f² broadband noise as basis for the signal</span>
+        <span class="n">wn</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numsamples</span><span class="p">)</span> <span class="c1"># normal distributed values</span>
+        <span class="n">wnf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">wn</span><span class="p">)</span> <span class="c1"># transform to freq domain</span>
+        <span class="n">wnf</span> <span class="o">/=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">wnf</span><span class="p">))</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># spectrum ~ 1/f²</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">wnf</span><span class="p">)</span> <span class="c1"># transform to time domain</span>
+
+        <span class="c1"># vector with all time instances</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numsamples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_freq</span>
+
+        <span class="c1"># iterate over all rotors</span>
+        <span class="k">for</span> <span class="n">rpm</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpm_list</span><span class="p">:</span>
+            <span class="n">f_base</span> <span class="o">=</span> <span class="n">rpm</span> <span class="o">/</span> <span class="mi">60</span> <span class="c1"># rotor speed in Hz</span>
+
+            <span class="c1"># randomly set phase of rotor</span>
+            <span class="n">phase</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+            
+            <span class="c1"># calculate higher harmonics up to 50 times the rotor speed</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># if we&#39;re looking at a blade passing frequency, make it louder</span>
+                <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blades_per_rotor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">amp</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">amp</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+                <span class="c1"># exponentially decrease amplitude for higher freqs with arbitrary factor</span>
+                <span class="n">amp</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+                
+                <span class="c1"># add harmonic signal component to existing signal</span>
+                <span class="n">sig</span> <span class="o">+=</span> <span class="n">amp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span> <span class="o">*</span> <span class="n">f_base</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">phase</span><span class="p">)</span> 
+
+        <span class="c1"># return signal normalized to given RMS value</span>
+        <span class="k">return</span> <span class="n">sig</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">rms</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we use the newly-defined class to create an object with parameters for a specific drone signal. 
+We choose to have a quadcopter with four rotors.
+As the simulation should feature the drone flying by, it makes sense for two of the rotors running at a higher speed than the other two, so as to tilt a quadcopter to let it fly in one direction. 
+Moreover, all rotors are chosen to have slightly different rotational speeds to make it a little more realistic (15010 rpm / 14962 rpm and 13536 rpm / 13007 rpm).</p>
+<p>The <code>sample_freq</code> and <code>numsamples</code> traits that we set here are inherited from the <code>SignalGenerator</code> base class.
+We use a standard sampling frequency for audio signals of 44'100 Hz here and generate a signal of a little above 10 seconds.
+The strength of the signal can be set via the (also inherited) <code>rms</code> trait, but we just use the default value of 1.0 here, so don't have to specifically set it.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t_msm</span> <span class="o">=</span> <span class="mf">10.5</span> <span class="c1"># s</span>
+<span class="c1"># sampling frequency</span>
+<span class="n">f_sample</span> <span class="o">=</span> <span class="mi">44100</span> <span class="c1"># Hz</span>
+
+<span class="n">drone_signal</span> <span class="o">=</span> <span class="n">DroneSignalGenerator</span><span class="p">(</span><span class="n">rpm_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15010</span><span class="p">,</span><span class="mi">14962</span><span class="p">,</span><span class="mi">13536</span><span class="p">,</span><span class="mi">13007</span><span class="p">],</span> 
+                                    <span class="n">num_blades_per_rotor</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> 
+                                    <span class="n">sample_freq</span> <span class="o">=</span> <span class="n">f_sample</span><span class="p">,</span> 
+                                    <span class="n">numsamples</span> <span class="o">=</span> <span class="n">f_sample</span><span class="o">*</span><span class="n">t_msm</span><span class="p">)</span>
+
+<span class="c1"># If you&#39;re running the example in an interactive environment, you might want</span>
+<span class="c1"># to listen to the pure signal by uncommenting the two following lines:</span>
+<span class="c1">#from IPython.display import Audio</span>
+<span class="c1">#display(Audio(drone_signal.signal(),rate = f_sample))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The spectrum (PSD) of our signal looks like this:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">psd</span><span class="p">(</span><span class="n">drone_signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(),</span> 
+        <span class="n">Fs</span> <span class="o">=</span> <span class="n">f_sample</span><span class="p">,</span>
+        <span class="n">NFFT</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In addition to the signal, we need characteristics of the source itself, its movement, the environment, and the way it is observed.
+We start with the "observer", i.e. a microphone array with only two microphones where the ears of a standing person might be located. 
+The observer's head is looking mostly towards positive $y$, but also slightly to the side from which the drone will come later.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">ac</span><span class="o">.</span><span class="n">MicGeom</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">mpos_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">],</span> <span class="c1"># x positions, all values in m</span>
+                       <span class="p">[</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">],</span> <span class="c1"># y</span>
+                       <span class="p">[</span> <span class="mf">1.7</span> <span class="p">,</span> <span class="mf">1.7</span><span class="p">]])</span> <span class="c1"># z</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, the flight path is defined.
+A trajectory in Acoular is defined via its "waypoints" with corresponding times.
+We can set as many waypoints as we want as a dictionary.</p>
+<p>Let's say that our drone flies about 10 m above ground, 
+from left to right, and a little in front of the observer.
+The flight speed is 16 m/s in $x$ direction.
+The absolute speed will be a little higher, since we slightly and randomly vary the $z$  and $y$ positions from one waypoint to the next.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">flight_speed</span> <span class="o">=</span> <span class="mi">16</span> <span class="c1"># m/s</span>
+
+<span class="c1"># 11 seconds trajectory, which is a little more than we have signal for</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> 
+
+<span class="c1"># Set one waypoint each second, </span>
+<span class="n">waypoints</span> <span class="o">=</span> <span class="p">{</span> <span class="n">t</span> <span class="p">:</span> <span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="mf">5.5</span><span class="p">)</span><span class="o">*</span><span class="n">flight_speed</span><span class="p">,</span>       <span class="c1"># vary </span>
+                     <span class="mi">6</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">),</span> <span class="c1"># randomly vary y position up to ±0.2 m around 6 m </span>
+                    <span class="mi">10</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.3</span><span class="p">))</span> <span class="c1"># randomly vary z position up to ±0.3 m around 10 m height</span>
+              <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ts</span> <span class="p">}</span>
+
+<span class="n">traj</span> <span class="o">=</span> <span class="n">ac</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">(</span><span class="n">points</span> <span class="o">=</span> <span class="n">waypoints</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's plot the trajectory together with the observer positions, as viewed from above.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">,(</span><span class="mi">20</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># plot observer</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">mpos</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">m</span><span class="o">.</span><span class="n">mpos</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span> <span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;observer&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot trajectory</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">,</span> <span class="n">zt</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">location</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;trajectory&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot the predefined waypoints</span>
+<span class="n">xwp</span><span class="p">,</span> <span class="n">ywp</span><span class="p">,</span> <span class="n">zwp</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">traj</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xwp</span><span class="p">,</span> <span class="n">ywp</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;traj. waypoints&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$ / m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$ / m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compared to the length of the flight path, the two microphones are positioned rather close to each other, so they appear almost as one position in the plot.</p>
+<p>Now we define an actual source. Many drones exhibit a strong directivity, so using a <code>MovingPointSourceDipole</code> seems a good choice here. 
+If we don't explicitly specify otherwise, the dipole lobes will be oriented along the z axis, which is what we want in this case.
+For calculating the observed sound pressure, i.e. for taking into account the sound travel path source to the observer, the object needs to know what kind of <a href="https://www.acoular.org/api_ref/generated/acoular.environments.html#module-acoular.environments">environment</a> it will be existing in.
+In our case, we just define a resting fluid with a speed of sound of 343 m/s.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">ac</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mf">343.</span><span class="p">)</span>
+
+<span class="c1"># Define point source</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">ac</span><span class="o">.</span><span class="n">MovingPointSourceDipole</span><span class="p">(</span><span class="n">signal</span> <span class="o">=</span> <span class="n">drone_signal</span><span class="p">,</span> <span class="c1"># the signal of the source</span>
+                               <span class="n">trajectory</span> <span class="o">=</span> <span class="n">traj</span><span class="p">,</span>     <span class="c1"># set trajectory</span>
+                               <span class="n">conv_amp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>       <span class="c1"># take into account convective amplification</span>
+                               <span class="n">mics</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span>              <span class="c1"># set the &quot;array&quot; with which to measure the sound field</span>
+                               <span class="n">start</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>           <span class="c1"># observation starts 0.5 seconds after signal starts at drone</span>
+                               <span class="n">env</span> <span class="o">=</span> <span class="n">e</span><span class="p">)</span>               <span class="c1"># the environment the source is moving in</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With this, we defined our source. But for a little more realism, let's add a "mirror source" to simulate ground reflections. 
+The properties of this source are exactly the same as for the original source, except for the $z$ coordinate, which is inversed here.
+After the definition of our mirror source, both source are combined into a joint sound field description via a <code>SourceMixer</code> object.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">waypoints_reflection</span> <span class="o">=</span> <span class="p">{</span> <span class="n">time</span> <span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">time</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">waypoints</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
+<span class="n">traj_reflection</span> <span class="o">=</span> <span class="n">ac</span><span class="o">.</span><span class="n">Trajectory</span><span class="p">(</span><span class="n">points</span> <span class="o">=</span> <span class="n">waypoints_reflection</span><span class="p">)</span>
+
+<span class="c1"># Define a mirror source with the mirrored trajectory</span>
+<span class="n">p_reflection</span> <span class="o">=</span> <span class="n">ac</span><span class="o">.</span><span class="n">MovingPointSourceDipole</span><span class="p">(</span><span class="n">signal</span> <span class="o">=</span> <span class="n">drone_signal</span><span class="p">,</span>        <span class="c1"># the same signal as above</span>
+                                          <span class="n">trajectory</span> <span class="o">=</span> <span class="n">traj_reflection</span><span class="p">,</span> <span class="c1"># set trajectory of mirror source</span>
+                                          <span class="n">conv_amp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">mics</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span>
+                                          <span class="n">start</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                                          <span class="n">env</span> <span class="o">=</span> <span class="n">e</span><span class="p">)</span> 
+
+<span class="c1"># Mix the original source and the mirror source</span>
+<span class="n">drone_above_ground</span> <span class="o">=</span> <span class="n">ac</span><span class="o">.</span><span class="n">SourceMixer</span><span class="p">(</span> <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">p_reflection</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we export a wav file of our simulation, so that we can listen to it with any audio player software.
+Because of the lazy evaluation paradigm, all the code above should run rather quickly, since no serious calculations were done up to now.
+This will change here, as the source signal is propagated sample-per-sample to generate the observed sound pressure time signals.
+The export may take a few minutes, so don't be alarmed if you don't immediately get the output.</p>
+<p>Before letting the data stream be exported as wav file, however, we divert it through a <code>TimeCache</code> object, which already writes the data on the disk (in Acoular-compatible format).
+The reason for this is that we do not need to recalculate everything if we happen to need the exact same data at a later point in time.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That's it, we did a simple drone auralization using the tools available in Acoular.
+If you listen to the output file with properly connected stereo headphones, you should hear something that resembles a quadcopter moving from left to right.</p>
+<p>Finally, let's visualize the transient signal of one channel in a spectrogram. 
+We use Acoular's <code>return_result</code> function on the output object to get the whole signal track at once instead of from a block-wise yielding generator.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">,(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">specgram</span><span class="p">(</span><span class="n">ac</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">return_result</span><span class="p">(</span><span class="n">output</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">],</span> 
+             <span class="n">Fs</span> <span class="o">=</span> <span class="n">f_sample</span><span class="p">,</span>
+             <span class="n">noverlap</span> <span class="o">=</span> <span class="mi">4096</span><span class="o">-</span><span class="mi">256</span><span class="p">,</span>
+             <span class="n">NFFT</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">,</span>
+             <span class="n">vmin</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span>
+             <span class="n">vmax</span><span class="o">=-</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$t$ / s&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$f$ / Hz&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Although this simulation is comparativly simple and far from realistic, the spectrogram already exhibits many of the features observed in actual measurement data of drone flybys: the frequency shift due to the Doppler effect, higher levels when the drone is close to the observer, and interference patterns due to ground reflections.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="acoular/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/2024/09/23/drone-auralization-example.html" hidden></a>
+</article>
+
+  
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      <ul class="list-inline text-center footer-links"></ul>
+
+      
+      <p class="copyright text-muted">
+      
+      2024
+
+      
+
+      
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+        and <a href="https://fastpages.fast.ai/">fastpages</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
